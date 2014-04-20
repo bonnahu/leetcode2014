@@ -25,41 +25,49 @@ public class ReorderList {
     public static void reorderList(ListNode head) {
        reorderList_recur(head, 0, getLenth(head));
     }
-   
+   /**
+    * 
+    * @param curNode
+    * @param index the index of the current node in the list
+    * @param Len the total length of the list
+    * @return
+    */
     private static ListNode reorderList_recur(ListNode curNode, int index, int Len){
-    	// base case
+    	// base case:
+    	// if the length of the list is less than 3, just return
     	if (curNode==null||Len <3 )
               return curNode;
     	// base case: when the current node is the middle node,
-    	// it means all the reorder operations are done, we need 
+    	// it means we can start the reorder operation. We need 
     	// to return the next node to the curNode, which is the 
     	// node needs to reorder the position
-    	if(index==(Len-1)/2){
+    	if(index==(Len-1)/2){// this is apply for both cases when Len is odd or even
     		ListNode retNode;
-    		// if the number of the list is odd,
+    		// if Len is odd,
     		// return the next node of the current
     		// node
     		if(Len % 2 != 0){
     			retNode = curNode.next;
 		        curNode.next=null;
-    		}else{
+    		}else{ // if Len is even, return the next next node
+    			   // E.g., 1->2->3->4, here when curNode = node2, we need to return node4
 		        retNode = curNode.next.next;
 		        curNode.next.next= null;
     		}
     		return retNode;
-    	}else{// recursive case
+    	}else{// recursive case:
     		// save the next node
     		ListNode nxtNode= curNode.next;
     		// recursively invoke the function
     		// The returning result should be the node to reorder
-    		ListNode ret =  reorderList_recur(nxtNode, index+1, Len);
-    		// save the next node of the ret node
-            ListNode ret_nxt = ret.next;
-            // reorder the ret node
-            curNode.next = ret;
-            ret.next = nxtNode;
+    		ListNode nodeToReorder =  reorderList_recur(nxtNode, index+1, Len);
+    		// save the next node of nodeToReorder
+            ListNode nxt_nodeToReorder = nodeToReorder.next;
+            // perform the reorder operation
+            curNode.next = nodeToReorder;
+            nodeToReorder.next = nxtNode;
             // return the next node to be reorder
-            return ret_nxt;
+            return nxt_nodeToReorder;
         }
     }
    
