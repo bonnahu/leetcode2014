@@ -99,8 +99,8 @@ public class ReorderList {
        ListNode l5 = new ListNode(5);
        l1.next = l2;
        l2.next = l3;
-       //l3.next = l4;
-       //l4.next = l5;
+       l3.next = l4;
+       l4.next = l5;
        ReorderList.printList(l1);
        ReorderList.reorderList(l1);
        ReorderList.printList(l1);
