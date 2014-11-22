@@ -26,6 +26,11 @@ class UndirectedGraphNode {
 	}
 }
 public class CloneGraph {
+	/**
+	 * Use recursion to clone the graph
+	 * @param node
+	 * @return
+	 */
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
     	HashMap<UndirectedGraphNode, UndirectedGraphNode> cloned_nodes = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
     	return cloneGraph_recur( node, cloned_nodes); 
